@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">Beer Advicer</string>
+    <string name="choose_beer_text">Choose beer type:</string>
+    <string name="find_beer_button">Search</string>
+    <string name="title_activity_find_beer">Find Beer</string>
+    <string name="title_activity_add_beer">Add Your Beer</string>
+    <string name="brands_text">Known brands of beer:</string>
+    <string name="brands_button">Brands</string>
+    <string-array name="beer_types_spinner">
+        <item>Light Lager</item>
+        <item>Pilsner</item>
+        <item>European amber lager</item>
+        <item>Dark Lager</item>
+        <item>Bock</item>
+        <item>Rauch Lager</item>
+        <item>Draft(Draught) Lager</item>
+        <item>Wheat beer</item>
+        <item>Lambic</item>
+        <item>Ale</item>
+        <item>Bitter Ale</item>
+        <item>Porter Ale</item>
+        <item>Stout Ale</item>
+        <item>Barley Wine Ale</item>
+    </string-array>
+
+    <string name="close_app_button">Quit</string>
+    <string name="add_new_beer_button">Seen Good Beer</string>
+    <string name="beer_type_hint">Enter beer type</string>
+    <string name="brand_hint">Enter the brand</string>
+    <string name="send_beer_button">Send beer</string>
+    <string name="share_beer_button">Share</string>
+    <string name="send_beer_text">
+        Hello! \nYou can send us your beer.
+        And we\'ll add it to our database if it\'s Ok.
+        \nJust use the form below.
+    </string>
+
+</resources>
