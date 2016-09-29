@@ -8,6 +8,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import static com.example.sergiosiniy.beeradvicer.BeerBrand.beerBrandArrayList;
+
 public class FindBeerActivity extends AppCompatActivity {
 
     @Override
@@ -19,9 +21,15 @@ public class FindBeerActivity extends AppCompatActivity {
 
     public void onClickFindBeer(View view) {
         Spinner beerType = (Spinner) findViewById(R.id.beer_type);
-        BeerBrand.setBeerBrandArrayList(beerType.getSelectedItem().toString());
 
-        Intent lightLager = new Intent(this, BeerListActivity.class);
-        startActivity(lightLager);
+        BeerBrand.setBeerBrandArrayList(beerType.getSelectedItem().toString());
+        if(beerBrandArrayList.size()==0){
+            Toast.makeText(this,"There is no beer brands of\n"+beerType.getSelectedItem()
+                    .toString()+" type in the list.",Toast.LENGTH_SHORT).show();
+        }else{
+            Intent lightLager = new Intent(this, BeerListActivity.class);
+            startActivity(lightLager);
+        }
+
     }
 }
