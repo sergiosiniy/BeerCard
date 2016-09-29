@@ -26,7 +26,7 @@
     <string name="close_app_button">Quit</string>
     <string name="add_new_beer_button">Seen Good Beer</string>
     <string name="beer_type_hint">Enter beer type</string>
-    <string name="brand_hint">Enter the brand</string>
+    <string name="brand_hint">Enter the brand name</string>
     <string name="send_beer_actionbar">Send beer</string>
     <string name="send_beer_button">Send beer</string>
     <string name="share_beer_button">Share</string>
