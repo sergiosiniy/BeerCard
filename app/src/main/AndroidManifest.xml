@@ -21,9 +21,8 @@
         <activity
             android:name=".AddNewBeer"
             android:label="@string/title_activity_add_beer" />
-        <activity android:name=".BeerListActivity">
-
-        </activity>
+        <activity android:name=".BeerListActivity"></activity>
+        <activity android:name=".BeerDetailsActivity"></activity>
     </application>
 
 </manifest>
