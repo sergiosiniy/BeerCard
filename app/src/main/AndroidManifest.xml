@@ -21,11 +21,13 @@
         <activity
             android:name=".activities.AdviceNewBeer"
             android:label="@string/title_activity_add_beer" />
-        <activity android:name=".activities.BeerFragmentsActivity"
-            android:parentActivityName=".activities.FindBeerActivity"/>
-        <activity android:name=".activities.BeerDetailsActivity"
-            android:parentActivityName=".activities.FindBeerActivity"/>
-
+        <activity
+            android:name=".activities.BeerFragmentsActivity"
+            android:parentActivityName=".activities.FindBeerActivity" />
+        <activity
+            android:name=".activities.BeerDetailsActivity"
+            android:parentActivityName=".activities.FindBeerActivity" />
+        <activity android:name=".activities.SendNewBeerActivity"></activity>
     </application>
 
 </manifest>

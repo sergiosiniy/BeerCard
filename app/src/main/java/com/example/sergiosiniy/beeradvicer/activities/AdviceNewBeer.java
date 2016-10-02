@@ -40,26 +40,6 @@ public class AdviceNewBeer extends AppCompatActivity {
         .putExtra(Intent.EXTRA_SUBJECT, "Beer advice from user")
         .putExtra(Intent.EXTRA_TEXT, shareBody);
         startActivity(sendMsg);
-
     }
-
-    /**
-     * This snippet wil be used in future for sharing beer with friends
-     */
-    /*public void shareBeer(View view){
-
-        beerType = (EditText)findViewById(R.id.beer_type_edit_text);
-        beerBrand  = (EditText)findViewById(R.id.brand_edit_text);
-        shareBody = beerType.getText().toString()+" - "+beerBrand.getText().toString();
-
-        ShareCompat.IntentBuilder
-                .from(this) // getActivity() or activity field if within Fragment
-                .setText(shareBody)
-                .setType("text/plain") // most general text sharing MIME type
-                .setChooserTitle(getResources().getString(R.string.share_beer_button))
-                .startChooser();
-    }*/
-
-
 
 }

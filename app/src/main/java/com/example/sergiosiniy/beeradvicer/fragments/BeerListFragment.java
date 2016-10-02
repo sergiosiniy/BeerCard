@@ -4,7 +4,6 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ListFragment;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -38,7 +37,6 @@ public class BeerListFragment extends ListFragment {
 
     /**
      * Will be called on API 23 or above
-     * @param context
      */
     @TargetApi(23)
     @Override
@@ -71,10 +69,6 @@ public class BeerListFragment extends ListFragment {
 
     /**
      * Set list adapter by ArrayList of beers filtered by beer type.
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -86,10 +80,6 @@ public class BeerListFragment extends ListFragment {
 
     /**
      * Pass the id of clicked item in the FragmentList of beers and call method.
-     * @param l
-     * @param v
-     * @param position
-     * @param id
      */
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {

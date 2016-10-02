@@ -19,21 +19,12 @@ public class StartScreen extends AppCompatActivity {
 
     /**
      * Opens activity for beer searching
-     * @param view
      */
     public void findBeer(View view){
         Intent findBeer = new Intent(this, FindBeerActivity.class);
         startActivity(findBeer);
     }
-
-    /**
-     * Opens activity for sending new beer brand
-     * @param view
-     */
-    public void addNewBeer(View view){
-        Intent addBeer = new Intent(this, AdviceNewBeer.class);
-        startActivity(addBeer);
-    }
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

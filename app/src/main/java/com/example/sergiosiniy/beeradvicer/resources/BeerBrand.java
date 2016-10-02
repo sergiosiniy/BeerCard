@@ -7,7 +7,7 @@ public class BeerBrand {
     private String name;
     private String beerType;
     private String beerDescription;
-    private int imageResourceId;
+    // private int imageResourceId;  (will be used in future for beer images
     private static final BeerBrand allBeerBrands[] = {
             new BeerBrand("Chernigovskoe svetloe", "Light Lager", "Just good and cheap beer"),
             new BeerBrand("Mudachevskoe", "Light Lager", "Just good and cheap beer"),
