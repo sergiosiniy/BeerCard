@@ -24,7 +24,7 @@ public class StartScreen extends AppCompatActivity {
         Intent findBeer = new Intent(this, FindBeerActivity.class);
         startActivity(findBeer);
     }
-    
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
