@@ -1,6 +1,4 @@
-package com.example.sergiosiniy.beeradvicer;
-
-import android.widget.Toast;
+package com.example.sergiosiniy.beeradvicer.resources;
 
 import java.util.ArrayList;
 
@@ -24,7 +22,7 @@ public class BeerBrand {
             new BeerBrand("Lvivske 1715", "Bock", "Just good and cheap beer")
     };
 
-    static ArrayList<BeerBrand> beerBrandArrayList;
+    public static ArrayList<BeerBrand> beerBrandArrayList;
 
     private BeerBrand(String name, String beerType, String beerDescription){
         this.name=name;
@@ -32,7 +30,7 @@ public class BeerBrand {
         this.beerType=beerType;
     }
 
-    static void setBeerBrandArrayList(String beerType){
+    public static void setBeerBrandArrayList(String beerType){
         beerBrandArrayList = new ArrayList<>();
         for(BeerBrand brand:allBeerBrands){
             if(brand.getBeerType().equals(beerType)) {

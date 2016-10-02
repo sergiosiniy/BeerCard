@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".StartScreen">
+        <activity android:name=".activities.StartScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -16,13 +16,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FindBeerActivity"
+            android:name=".activities.FindBeerActivity"
             android:label="@string/title_activity_find_beer" />
         <activity
-            android:name=".AddNewBeer"
+            android:name=".activities.AdviceNewBeer"
             android:label="@string/title_activity_add_beer" />
-        <activity android:name=".BeerListActivity"></activity>
-        <activity android:name=".BeerDetailsActivity"></activity>
+        <activity android:name=".activities.BeerFragmentsActivity"
+            android:parentActivityName=".activities.FindBeerActivity"/>
+        <activity android:name=".activities.BeerDetailsActivity"
+            android:parentActivityName=".activities.FindBeerActivity"/>
+
     </application>
 
 </manifest>

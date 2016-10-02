@@ -1,4 +1,4 @@
-package com.example.sergiosiniy.beeradvicer;
+package com.example.sergiosiniy.beeradvicer.activities;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -9,7 +9,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-public class AddNewBeer extends AppCompatActivity {
+import com.example.sergiosiniy.beeradvicer.R;
+
+public class AdviceNewBeer extends AppCompatActivity {
 
     private Spinner beerType;
     private EditText beerBrand;

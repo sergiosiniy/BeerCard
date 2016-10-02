@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.sergiosiniy.beeradvicer.FindBeerActivity">
+    tools:context="com.example.sergiosiniy.beeradvicer.activities.FindBeerActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -31,26 +31,5 @@
         android:layout_below="@+id/beer_type"
         android:text="@string/find_beer_button"
         android:onClick="onClickFindBeer"/>
-
-    <TextView
-        android:id="@+id/known_brands"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/find_beer"
-        android:layout_marginTop="18dp"
-        android:text="@string/brands_text" />
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_below="@id/known_brands"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="18dp">
-        <TextView
-            android:id="@+id/brands"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </ScrollView>
 
 </RelativeLayout>

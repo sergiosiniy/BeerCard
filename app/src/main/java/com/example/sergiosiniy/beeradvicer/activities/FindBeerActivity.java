@@ -1,14 +1,17 @@
-package com.example.sergiosiniy.beeradvicer;
+package com.example.sergiosiniy.beeradvicer.activities;
+
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import static com.example.sergiosiniy.beeradvicer.BeerBrand.beerBrandArrayList;
+import com.example.sergiosiniy.beeradvicer.resources.BeerBrand;
+import com.example.sergiosiniy.beeradvicer.R;
+
+import static com.example.sergiosiniy.beeradvicer.resources.BeerBrand.beerBrandArrayList;
 
 public class FindBeerActivity extends AppCompatActivity {
 
@@ -18,7 +21,11 @@ public class FindBeerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_find_beer);
     }
 
-
+    /**
+     * Get selected item from Spinner and filter array.
+     * If there is such items start activity to select one for details.
+     * @param view
+     */
     public void onClickFindBeer(View view) {
         Spinner beerType = (Spinner) findViewById(R.id.beer_type);
 
@@ -27,8 +34,8 @@ public class FindBeerActivity extends AppCompatActivity {
             Toast.makeText(this,"There is no beer brands of\n"+beerType.getSelectedItem()
                     .toString()+" type in the list.",Toast.LENGTH_SHORT).show();
         }else{
-            Intent lightLager = new Intent(this, BeerListActivity.class);
-            startActivity(lightLager);
+            Intent beerDetailsAct = new Intent(this, BeerFragmentsActivity.class);
+            startActivity(beerDetailsAct);
         }
 
     }

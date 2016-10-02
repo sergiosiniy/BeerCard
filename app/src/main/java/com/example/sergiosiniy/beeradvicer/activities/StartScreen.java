@@ -1,4 +1,4 @@
-package com.example.sergiosiniy.beeradvicer;
+package com.example.sergiosiniy.beeradvicer.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.example.sergiosiniy.beeradvicer.R;
 
 public class StartScreen extends AppCompatActivity {
 
@@ -29,7 +31,7 @@ public class StartScreen extends AppCompatActivity {
      * @param view
      */
     public void addNewBeer(View view){
-        Intent addBeer = new Intent(this, AddNewBeer.class);
+        Intent addBeer = new Intent(this, AdviceNewBeer.class);
         startActivity(addBeer);
     }
     @Override
@@ -42,7 +44,7 @@ public class StartScreen extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.send_beer:
-                Intent addBeer = new Intent(this, AddNewBeer.class);
+                Intent addBeer = new Intent(this, AdviceNewBeer.class);
                 startActivity(addBeer);
                 return true;
             default:
