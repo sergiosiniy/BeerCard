@@ -1,13 +1,15 @@
 <resources>
+
+    <!-- Application name -->
     <string name="app_name">Beer Map</string>
+
+    <!-- Activities's titles -->
     <string name="title_activity_select_beer">Brands</string>
     <string name="title_activity_beer_details">Beer Details</string>
-    <string name="choose_beer_text">Choose beer type:</string>
-    <string name="find_beer_button">Search</string>
     <string name="title_activity_find_beer">Find Beer</string>
     <string name="title_activity_add_beer">Send Us Your Beer!</string>
-    <string name="brands_text">Known brands of beer:</string>
-    <string name="brands_button">Brands</string>
+
+    <!-- Arrays -->
     <string-array name="beer_types_spinner">
         <item>Light Lager</item>
         <item>Pilsner</item>
@@ -25,20 +27,24 @@
         <item>Barley Wine Ale</item>
     </string-array>
 
+    <!-- Buttons -->
+    <string name="find_beer_button">Search</string>
+    <string name="brands_button">Brands</string>
     <string name="close_app_button">Quit</string>
     <string name="add_new_beer_button">Seen Good Beer</string>
-    <string name="beer_type_hint">Enter beer type</string>
-    <string name="brand_hint">Enter the brand name</string>
-    <string name="send_beer_actionbar">Send beer</string>
     <string name="send_beer_button">Send beer</string>
-    <string name="share_beer_button">Share</string>
+    <string name="send_beer_actionbar_button">Send beer</string>
+    <string name="share_beer_actionbar_button">Share</string>
+
+    <!-- TextViews -->
     <string name="send_beer_text">
         Hello! \nYou can send us your beer.
         And we\'ll add it to our database if it\'s Ok.
         \nJust use the form below.
     </string>
+    <string name="choose_beer_text">Choose beer type:</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Hints -->
+    <string name="brand_hint">Enter the brand name</string>
 
 </resources>

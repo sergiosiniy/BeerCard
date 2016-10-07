@@ -23,7 +23,7 @@ public class FindBeerActivity extends AppCompatActivity {
 
     /**
      * Get selected item from Spinner and filter array.
-     * If there is such items start activity to select one for details.
+     * If there is such items start activity with list of filtered items.
      * @param view
      */
     public void onClickFindBeer(View view) {
@@ -34,8 +34,8 @@ public class FindBeerActivity extends AppCompatActivity {
             Toast.makeText(this,"There is no beer brands of\n"+beerType.getSelectedItem()
                     .toString()+" type in the list.",Toast.LENGTH_SHORT).show();
         }else{
-            Intent beerDetailsAct = new Intent(this, BeerFragmentsActivity.class);
-            startActivity(beerDetailsAct);
+            Intent beerFragmentsAct = new Intent(this, BeerFragmentsActivity.class);
+            startActivity(beerFragmentsAct);
         }
 
     }

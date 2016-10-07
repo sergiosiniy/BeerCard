@@ -1,6 +1,6 @@
 package com.example.sergiosiniy.beeradvicer.activities;
 
-import android.app.ActionBar;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -31,7 +31,6 @@ public class BeerFragmentsActivity extends AppCompatActivity implements BeerList
             FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
             fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             fragmentTransaction.replace(R.id.fragment_container,detailsFragment);
-            fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         }else{
             Intent beerDetailsActivity = new Intent(this,BeerDetailsActivity.class)

@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activities.BeerFragmentsActivity">
     <item android:id="@+id/share_beer"
-        android:title="@string/send_beer_actionbar"
+        android:title="@string/share_beer_actionbar_button"
         android:orderInCategory="100"
         app:showAsAction="ifRoom"
         android:icon="@mipmap/ic_share_white_36dp"/>
