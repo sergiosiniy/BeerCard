@@ -1,20 +1,18 @@
 package com.example.sergiosiniy.beeradvicer.activities;
 
-import android.content.Intent;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.TextView;
 
 import com.example.sergiosiniy.beeradvicer.R;
 import com.example.sergiosiniy.beeradvicer.fragments.BeerDetailsFragment;
-import com.example.sergiosiniy.beeradvicer.fragments.BeerListFragment;
 
 public class BeerDetailsActivity extends AppCompatActivity {
     public static final String EXTRA_BEER_ITEM_ID="id";
+    private BeerDetailsFragment beerFrDetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +21,7 @@ public class BeerDetailsActivity extends AppCompatActivity {
 
         BeerDetailsFragment beerDetailsFragment = (BeerDetailsFragment) getFragmentManager()
                 .findFragmentById(R.id.beer_detail_frag);
+        beerFrDetails =beerDetailsFragment;
         beerDetailsFragment.setBeerItemID((int) getIntent().getExtras().get(EXTRA_BEER_ITEM_ID));
     }
 
@@ -33,12 +32,14 @@ public class BeerDetailsActivity extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item){
+        TextView beerBrName = (TextView) beerFrDetails.getView().findViewById(R.id.beer_brand_name);
+        TextView beerBrDetails = (TextView) beerFrDetails.getView().findViewById(R.id.beer_brand_details);
         switch(item.getItemId()){
             case R.id.share_beer:
                 ShareCompat.IntentBuilder.from(BeerDetailsActivity.this)
                         .setType("text/plain")
-                        .setSubject("test")
-                        .setText("test body")
+                        .setSubject(beerBrName.getText().toString())
+                        .setText(beerBrDetails.getText().toString())
                         .startChooser();
             default:
                 return super.onOptionsItemSelected(item);

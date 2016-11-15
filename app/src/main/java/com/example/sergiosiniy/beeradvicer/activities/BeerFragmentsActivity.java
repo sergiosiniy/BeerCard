@@ -3,18 +3,28 @@ package com.example.sergiosiniy.beeradvicer.activities;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sergiosiniy.beeradvicer.R;
 import com.example.sergiosiniy.beeradvicer.fragments.BeerDetailsFragment;
 import com.example.sergiosiniy.beeradvicer.fragments.BeerListFragment;
 
+import static android.os.Build.VERSION_CODES.N;
 import static com.example.sergiosiniy.beeradvicer.activities.BeerDetailsActivity.EXTRA_BEER_ITEM_ID;
 
 public class BeerFragmentsActivity extends AppCompatActivity implements BeerListFragment.
         BeerListListener {
+
+    BeerDetailsFragment beerFrDetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +38,7 @@ public class BeerFragmentsActivity extends AppCompatActivity implements BeerList
         if(view!=null){
             BeerDetailsFragment detailsFragment = new BeerDetailsFragment();
             detailsFragment.setBeerItemID(id);
+            beerFrDetails=detailsFragment;
             FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
             fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             fragmentTransaction.replace(R.id.fragment_container,detailsFragment);
@@ -36,6 +47,32 @@ public class BeerFragmentsActivity extends AppCompatActivity implements BeerList
             Intent beerDetailsActivity = new Intent(this,BeerDetailsActivity.class)
                     .putExtra(EXTRA_BEER_ITEM_ID, (int) id);
             startActivity(beerDetailsActivity);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_beer_details, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        try {
+            TextView beerBrName = (TextView) beerFrDetails.getView().findViewById(R.id.beer_brand_name);
+            TextView beerBrDetails = (TextView) beerFrDetails.getView().findViewById(R.id.beer_brand_details);
+            switch (item.getItemId()) {
+                case R.id.share_beer:
+                    ShareCompat.IntentBuilder.from(BeerFragmentsActivity.this)
+                            .setType("text/plain")
+                            .setSubject(beerBrName.getText().toString())
+                            .setText(beerBrDetails.getText().toString())
+                            .startChooser();
+                default:
+                    return super.onOptionsItemSelected(item);
+            }
+        }catch (NullPointerException e){
+            Toast.makeText(this, "No items were selected!",Toast.LENGTH_SHORT).show();
+            return super.onOptionsItemSelected(item);
         }
     }
 
