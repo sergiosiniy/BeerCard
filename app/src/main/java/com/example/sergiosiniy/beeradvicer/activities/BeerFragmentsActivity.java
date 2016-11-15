@@ -36,12 +36,11 @@ public class BeerFragmentsActivity extends AppCompatActivity implements BeerList
     public void beerItemClicked(long id) {
         View view = findViewById(R.id.fragment_container);
         if(view!=null){
-            BeerDetailsFragment detailsFragment = new BeerDetailsFragment();
-            detailsFragment.setBeerItemID(id);
-            beerFrDetails=detailsFragment;
+            beerFrDetails=new BeerDetailsFragment();
+            beerFrDetails.setBeerItemID(id);
             FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
             fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-            fragmentTransaction.replace(R.id.fragment_container,detailsFragment);
+            fragmentTransaction.replace(R.id.fragment_container,beerFrDetails);
             fragmentTransaction.commit();
         }else{
             Intent beerDetailsActivity = new Intent(this,BeerDetailsActivity.class)

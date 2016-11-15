@@ -19,10 +19,10 @@ public class BeerDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beer_details);
 
-        BeerDetailsFragment beerDetailsFragment = (BeerDetailsFragment) getFragmentManager()
+        beerFrDetails = (BeerDetailsFragment) getFragmentManager()
                 .findFragmentById(R.id.beer_detail_frag);
-        beerFrDetails =beerDetailsFragment;
-        beerDetailsFragment.setBeerItemID((int) getIntent().getExtras().get(EXTRA_BEER_ITEM_ID));
+
+        beerFrDetails.setBeerItemID((int) getIntent().getExtras().get(EXTRA_BEER_ITEM_ID));
     }
 
     @Override
