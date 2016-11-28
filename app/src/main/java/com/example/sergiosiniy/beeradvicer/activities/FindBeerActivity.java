@@ -13,6 +13,10 @@ import com.example.sergiosiniy.beeradvicer.R;
 import com.example.sergiosiniy.beeradvicer.utils.BeerBrand;
 import com.example.sergiosiniy.beeradvicer.utils.BeerRequests;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,6 +24,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class FindBeerActivity extends AppCompatActivity {
 
@@ -44,7 +49,7 @@ public class FindBeerActivity extends AppCompatActivity {
         BufferedReader br;
         String jsonResult = "fail";
         String url;
-        Toast toast;
+
 
         @Override
         protected void onPreExecute(){
@@ -69,8 +74,9 @@ public class FindBeerActivity extends AppCompatActivity {
                 InputStream inputStream = serverConnection.getInputStream();
                 br = new BufferedReader(new InputStreamReader(inputStream));
 
-                while (br.readLine()!=null){
-                    sb.append(br.readLine());
+                String line;
+                while ((line = br.readLine())!=null){
+                    sb.append(line);
                 }
 
                 jsonResult = sb.toString();
@@ -78,10 +84,10 @@ public class FindBeerActivity extends AppCompatActivity {
 
             }catch(MalformedURLException e){
                 e.printStackTrace();
-               toast = Toast.makeText(FindBeerActivity.this,"MalformedURLException catched",Toast.LENGTH_SHORT);
+
             }catch(IOException e){
                 e.printStackTrace();
-                toast = Toast.makeText(FindBeerActivity.this,"IOException catched",Toast.LENGTH_SHORT);
+
             }
 
             return jsonResult;
@@ -92,11 +98,24 @@ public class FindBeerActivity extends AppCompatActivity {
         protected void onPostExecute(String result){
             super.onPostExecute(result);
             if(!result.equals("fail")){
-                    BeerBrand.setBeerBrandArrayList(result);
+                try {
+                    BeerBrand.beerBrandArrayList = new ArrayList<>();
+                    JSONObject jsonObject = new JSONObject(result);
+                    JSONArray beerArray = jsonObject.getJSONArray("beers");
+                    for (int i = 0; i < beerArray.length(); i++) {
+                        JSONObject beerBrand = beerArray.getJSONObject(i);
+                        BeerBrand.beerBrandArrayList.add(new BeerBrand(beerBrand.getString("beerBrand"),
+                                beerBrand.getString("beerDescription"),beerBrand.getInt("beerType")));
+                    }
                     Intent beerList = new Intent(FindBeerActivity.this,BeerFragmentsActivity.class);
                     startActivity(beerList);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
             }else{
-              toast.show();
+
             }
         }
     }
