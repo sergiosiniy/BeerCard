@@ -21,7 +21,6 @@ public class BeerDetailsActivity extends AppCompatActivity {
 
         beerFrDetails = (BeerDetailsFragment) getFragmentManager()
                 .findFragmentById(R.id.beer_detail_frag);
-
         beerFrDetails.setBeerItemID((int) getIntent().getExtras().get(EXTRA_BEER_ITEM_ID));
     }
 
