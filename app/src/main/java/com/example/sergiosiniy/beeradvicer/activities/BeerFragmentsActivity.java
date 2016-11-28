@@ -53,8 +53,10 @@ public class BeerFragmentsActivity extends AppCompatActivity implements BeerList
 
     public boolean onOptionsItemSelected(MenuItem item) {
         try {
-            TextView beerBrName = (TextView) beerFrDetails.getView().findViewById(R.id.beer_brand_name);
-            TextView beerBrDetails = (TextView) beerFrDetails.getView().findViewById(R.id.beer_brand_details);
+            TextView beerBrName = (TextView) beerFrDetails.getView()
+                    .findViewById(R.id.beer_brand_name);
+            TextView beerBrDetails = (TextView) beerFrDetails.getView()
+                    .findViewById(R.id.beer_brand_details);
             switch (item.getItemId()) {
                 case R.id.share_beer:
                     ShareCompat.IntentBuilder.from(BeerFragmentsActivity.this)
