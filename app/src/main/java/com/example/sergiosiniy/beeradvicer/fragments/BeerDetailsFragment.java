@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.sergiosiniy.beeradvicer.R;
-import com.example.sergiosiniy.beeradvicer.resources.BeerBrand;
+import com.example.sergiosiniy.beeradvicer.utils.BeerBrand;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,4 +60,6 @@ public class BeerDetailsFragment extends Fragment {
     public void setBeerItemID(long id){
         this.beerItemID=id;
     }
+
+
 }

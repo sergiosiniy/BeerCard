@@ -13,11 +13,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.example.sergiosiniy.beeradvicer.resources.BeerBrand;
+import com.example.sergiosiniy.beeradvicer.utils.BeerBrand;
 
-/**
- * Created by Sergiosiniy on 02.10.2016.
- */
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 
 public class BeerListFragment extends ListFragment {
 
@@ -71,8 +71,10 @@ public class BeerListFragment extends ListFragment {
      * Set list adapter by ArrayList of beers filtered by beer type.
      */
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ListAdapter beerList = new ArrayAdapter<>(inflater.getContext(), android.R.layout.simple_list_item_1,
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        ListAdapter beerList = new ArrayAdapter<>(inflater.getContext(),
+                android.R.layout.simple_list_item_1,
                 BeerBrand.beerBrandArrayList);
         setListAdapter(beerList);
         return super.onCreateView(inflater, container, savedInstanceState);

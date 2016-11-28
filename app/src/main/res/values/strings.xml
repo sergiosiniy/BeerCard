@@ -39,12 +39,15 @@
     <!-- TextViews -->
     <string name="send_beer_text">
         Hello! \nYou can send us your beer.
-        And we\'ll add it to our database if it\'s Ok.
+        And we\'ll add it to our database if it\'s OK.
         \nJust use the form below.
     </string>
-    <string name="choose_beer_text">Choose beer type:</string>
+    <string name="find_beer_textview">Find beer by brand:</string>
+    <string name="find_type_textview">or \nFind beer by type:</string>
 
     <!-- Hints -->
     <string name="brand_hint">Enter the brand name</string>
+    <string name="find_beer_hint">Beer brand name (i.e. Hoegarden)</string>
+    <string name="find_type_hint">Beer type (i.e. Light Lager)</string>
 
 </resources>
