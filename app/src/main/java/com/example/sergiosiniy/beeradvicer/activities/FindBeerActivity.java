@@ -78,7 +78,7 @@ public class FindBeerActivity extends AppCompatActivity {
 
             }catch(MalformedURLException e){
                 e.printStackTrace();
-                toast = Toast.makeText(FindBeerActivity.this,"MalformedURLException catched",Toast.LENGTH_SHORT);
+               toast = Toast.makeText(FindBeerActivity.this,"MalformedURLException catched",Toast.LENGTH_SHORT);
             }catch(IOException e){
                 e.printStackTrace();
                 toast = Toast.makeText(FindBeerActivity.this,"IOException catched",Toast.LENGTH_SHORT);
@@ -96,7 +96,7 @@ public class FindBeerActivity extends AppCompatActivity {
                     Intent beerList = new Intent(FindBeerActivity.this,BeerFragmentsActivity.class);
                     startActivity(beerList);
             }else{
-                toast.show();
+              toast.show();
             }
         }
     }
