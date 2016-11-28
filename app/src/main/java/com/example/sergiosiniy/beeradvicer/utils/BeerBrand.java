@@ -31,5 +31,9 @@ public class BeerBrand {
         return this.beerDescription;
     }
 
+    public String toString(){
+        return this.beerName;
+    }
+
 
 }
