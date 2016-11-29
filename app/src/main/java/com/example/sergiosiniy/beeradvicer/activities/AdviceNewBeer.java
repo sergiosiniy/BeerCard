@@ -13,8 +13,8 @@ import com.example.sergiosiniy.beeradvicer.R;
 
 public class AdviceNewBeer extends AppCompatActivity {
 
-    private Spinner beerType;
-    private EditText beerBrand;
+
+
     private String shareBody;
 
     @Override
@@ -30,8 +30,8 @@ public class AdviceNewBeer extends AppCompatActivity {
      */
     public void sendMessage(View view){
 
-        beerType = (Spinner) findViewById(R.id.beer_type_spinner_sendto);
-        beerBrand  = (EditText)findViewById(R.id.brand_edit_text);
+        Spinner beerType = (Spinner) findViewById(R.id.beer_type_spinner_sendto);
+        EditText beerBrand  = (EditText)findViewById(R.id.brand_edit_text);
         shareBody = beerType.getSelectedItem().toString()+" - "+beerBrand.getText().toString();
         Uri adminMail = Uri.parse("mailto:sergio.siniy@gmail.com");
 

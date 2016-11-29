@@ -37,6 +37,7 @@ public class FindBeerActivity extends AppCompatActivity {
     /**
      * Get selected item from Spinner and filter array.
      * If there is such items start activity with list of filtered items.
+     *
      * @param view
      */
     public void onClickFindBeer(View view) {
@@ -44,7 +45,7 @@ public class FindBeerActivity extends AppCompatActivity {
     }
 
 
-    private class BeerSearcher extends AsyncTask<Void, Void, String>{
+    private class BeerSearcher extends AsyncTask<Void, Void, String> {
         HttpURLConnection serverConnection;
         BufferedReader br;
         String jsonResult = "fail";
@@ -52,12 +53,12 @@ public class FindBeerActivity extends AppCompatActivity {
 
 
         @Override
-        protected void onPreExecute(){
+        protected void onPreExecute() {
             EditText beerSearch = (EditText) findViewById(R.id.find_beer_edittext);
-            if(beerSearch.getText().toString().length()!=0){
-                url = BeerRequests.FIND_ALL_BEERS_BY_STRING+beerSearch.getText().toString();
-            }else{
-                url= BeerRequests.ALL_BEERS;
+            if (beerSearch.getText().toString().length() != 0) {
+                url = BeerRequests.FIND_ALL_BEERS_BY_STRING + beerSearch.getText().toString();
+            } else {
+                url = BeerRequests.ALL_BEERS;
             }
 
         }
@@ -65,7 +66,7 @@ public class FindBeerActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... s) {
             StringBuffer sb = new StringBuffer();
-            try{
+            try {
                 URL beerServerUrl = new URL(url);
                 serverConnection = (HttpURLConnection) beerServerUrl.openConnection();
                 serverConnection.setRequestMethod("GET");
@@ -75,17 +76,19 @@ public class FindBeerActivity extends AppCompatActivity {
                 br = new BufferedReader(new InputStreamReader(inputStream));
 
                 String line;
-                while ((line = br.readLine())!=null){
+                while ((line = br.readLine()) != null) {
                     sb.append(line);
                 }
 
                 jsonResult = sb.toString();
                 return jsonResult;
 
-            }catch(MalformedURLException e){
+            } catch (MalformedURLException e) {
+                url = "Malformed URL Exception! Something wrong with url connection.";
                 e.printStackTrace();
 
-            }catch(IOException e){
+            } catch (IOException e) {
+                url = "IO Exception";
                 e.printStackTrace();
 
             }
@@ -95,9 +98,9 @@ public class FindBeerActivity extends AppCompatActivity {
 
 
         @Override
-        protected void onPostExecute(String result){
+        protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            if(!result.equals("fail")){
+            if (!result.equals("fail")) {
                 try {
                     BeerBrand.beerBrandArrayList = new ArrayList<>();
                     JSONObject jsonObject = new JSONObject(result);
@@ -106,17 +109,15 @@ public class FindBeerActivity extends AppCompatActivity {
                         JSONObject beerBrand = beerArray.getJSONObject(i);
                         BeerBrand.beerBrandArrayList.add(new BeerBrand(beerBrand
                                 .getString("beerBrand"), beerBrand.getString("beerDescription")
-                                ,beerBrand.getInt("beerType")));
+                                , beerBrand.getInt("beerType")));
                     }
-                    Intent beerList = new Intent(FindBeerActivity.this,BeerFragmentsActivity.class);
+                    Intent beerList = new Intent(FindBeerActivity.this, BeerFragmentsActivity.class);
                     startActivity(beerList);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
-            }else{
-
+            } else {
+                Toast.makeText(FindBeerActivity.this, url, Toast.LENGTH_SHORT).show();
             }
         }
     }

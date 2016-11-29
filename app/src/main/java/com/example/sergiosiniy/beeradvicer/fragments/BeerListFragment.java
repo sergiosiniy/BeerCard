@@ -15,9 +15,6 @@ import android.widget.ListView;
 
 import com.example.sergiosiniy.beeradvicer.utils.BeerBrand;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 
 public class BeerListFragment extends ListFragment {
 
