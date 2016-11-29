@@ -39,7 +39,8 @@ public class BeerDetailsActivity extends AppCompatActivity {
                 ShareCompat.IntentBuilder.from(BeerDetailsActivity.this)
                         .setType("text/plain")
                         .setSubject(beerBrName.getText().toString())
-                        .setText(beerBrDetails.getText().toString())
+                        .setText(beerBrName.getText().toString()+" - "
+                                +beerBrDetails.getText().toString())
                         .startChooser();
             default:
                 return super.onOptionsItemSelected(item);

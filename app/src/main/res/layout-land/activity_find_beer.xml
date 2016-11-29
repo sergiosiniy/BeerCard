@@ -23,23 +23,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/find_beer_textview"
+        android:inputType="text"
+        android:imeOptions="actionDone"
+        android:maxLines="1"
+        android:maxLength="40"
         android:hint="@string/find_beer_hint"
         android:background="@android:color/white"/>
-    <TextView
-        android:id="@+id/find_type_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/find_beer_edittext"
-        android:text="@string/find_type_textview"
-        android:textColor="@android:color/background_light"/>
 
-    <EditText
-        android:id="@+id/find_type_edittext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/find_type_textview"
-        android:hint="@string/find_type_hint"
-        android:background="@android:color/white"/>
     <Button
         android:id="@+id/find_beer"
         android:layout_width="wrap_content"

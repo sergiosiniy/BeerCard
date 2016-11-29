@@ -57,12 +57,14 @@ public class BeerFragmentsActivity extends AppCompatActivity implements BeerList
                     .findViewById(R.id.beer_brand_name);
             TextView beerBrDetails = (TextView) beerFrDetails.getView()
                     .findViewById(R.id.beer_brand_details);
+
             switch (item.getItemId()) {
                 case R.id.share_beer:
                     ShareCompat.IntentBuilder.from(BeerFragmentsActivity.this)
                             .setType("text/plain")
                             .setSubject(beerBrName.getText().toString())
-                            .setText(beerBrDetails.getText().toString())
+                            .setText(beerBrName.getText().toString()+" - "
+                                    +beerBrDetails.getText().toString())
                             .startChooser();
                 default:
                     return super.onOptionsItemSelected(item);
