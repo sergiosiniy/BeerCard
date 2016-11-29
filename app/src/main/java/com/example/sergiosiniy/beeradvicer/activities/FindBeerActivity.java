@@ -55,8 +55,12 @@ public class FindBeerActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             EditText beerSearch = (EditText) findViewById(R.id.find_beer_edittext);
+            String searchSequence = beerSearch.getText().toString();
+            if(searchSequence.contains(" ")){
+                searchSequence=searchSequence.replace(" ","%20");
+            }
             if (beerSearch.getText().toString().length() != 0) {
-                url = BeerRequests.FIND_ALL_BEERS_BY_STRING + beerSearch.getText().toString();
+                url = BeerRequests.FIND_ALL_BEERS_BY_STRING + searchSequence;
             } else {
                 url = BeerRequests.ALL_BEERS;
             }
