@@ -52,6 +52,7 @@ public class BeerFragmentsActivity extends AppCompatActivity implements BeerList
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
+
         try {
             TextView beerBrName = (TextView) beerFrDetails.getView()
                     .findViewById(R.id.beer_brand_name);
@@ -73,6 +74,9 @@ public class BeerFragmentsActivity extends AppCompatActivity implements BeerList
             Toast.makeText(this, "No items were selected!", Toast.LENGTH_SHORT).show();
             return super.onOptionsItemSelected(item);
         }
+
+
+
     }
 
 

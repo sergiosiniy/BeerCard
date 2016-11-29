@@ -92,7 +92,7 @@ public class FindBeerActivity extends AppCompatActivity {
                 e.printStackTrace();
 
             } catch (IOException e) {
-                url = "IO Exception";
+                url = "IO Exception:Can't get data from server.";
                 e.printStackTrace();
 
             }
