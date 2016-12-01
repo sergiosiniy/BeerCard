@@ -30,7 +30,8 @@
     <!-- Buttons -->
     <string name="find_beer_button">Search</string>
     <string name="brands_button">Brands</string>
-    <string name="close_app_button">Quit</string>
+    <string name="quit_dialog_button">Quit</string>
+    <string name="retry_dialog_button">Retry</string>
     <string name="add_new_beer_button">Seen Good Beer</string>
     <string name="send_beer_button">Send beer</string>
     <string name="send_beer_actionbar_button">Send beer</string>
@@ -49,5 +50,12 @@
     <string name="brand_hint">Enter the brand name</string>
     <string name="find_beer_hint">Beer brand name (i.e. Hoegarden)</string>
     <string name="find_type_hint">Beer type (i.e. Light Lager)</string>
+
+    <!--Dialogs-->
+    <string name="dialog_no_srv_connection">There is no connection to server.
+        \nTry again later, please.\nSorry! =(</string>
+    <string name="dialog_no_net_connection">Looks like you doesn\'t have Internet connection!
+        \nPlease check your network connection.
+        \n Thank you!</string>
 
 </resources>

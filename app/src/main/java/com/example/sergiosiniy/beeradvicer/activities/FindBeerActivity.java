@@ -92,7 +92,8 @@ public class FindBeerActivity extends AppCompatActivity {
                 e.printStackTrace();
 
             } catch (IOException e) {
-                url = "IO Exception:Can't get data from server.";
+                url = "Can't get data from server." +
+                        "Server is unreachable.";
                 e.printStackTrace();
 
             }
@@ -121,7 +122,7 @@ public class FindBeerActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             } else {
-                Toast.makeText(FindBeerActivity.this, url, Toast.LENGTH_SHORT).show();
+                Toast.makeText(FindBeerActivity.this, url, Toast.LENGTH_LONG).show();
             }
         }
     }

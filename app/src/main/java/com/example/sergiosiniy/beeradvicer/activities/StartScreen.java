@@ -1,6 +1,8 @@
 package com.example.sergiosiniy.beeradvicer.activities;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
@@ -8,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.sergiosiniy.beeradvicer.R;
 
@@ -20,13 +21,8 @@ public class StartScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_screen);
-        if(!isNetworkConnected()){
-            Toast.makeText(this,"No network connection! \nCheck your Wi-Fi connection! ",
-                    Toast.LENGTH_SHORT).show();
-        }else if(!isServerReachable()){
-            Toast.makeText(this,"Server is unreachable! Try again later. \nSory =(",
-                    Toast.LENGTH_SHORT).show();
-        }
+        noNetworkConnectionDialog(isNetworkConnected());
+        noServerConnectionDialog(isServerReachable());
     }
 
     /**
@@ -63,7 +59,6 @@ public class StartScreen extends AppCompatActivity {
     }
 
     private boolean isServerReachable(){
-
         try{
             InetAddress address = InetAddress.getByName("31.134.121.230");
             return !address.equals("");
@@ -71,6 +66,54 @@ public class StartScreen extends AppCompatActivity {
             return false;
         }
     }
+
+    private void noNetworkConnectionDialog(Boolean isNetworkConnected){
+        if(!isNetworkConnected){
+            AlertDialog.Builder builder = new AlertDialog.Builder(StartScreen.this);
+            builder.setTitle("No network connection!")
+                    .setMessage(getResources().getString(R.string.dialog_no_net_connection))
+                    .setIcon(R.mipmap.no_connection)
+                    .setCancelable(false)
+                    .setPositiveButton(R.string.quit_dialog_button, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            System.exit(1);
+                        }
+                    })
+                    .setNegativeButton(R.string.retry_dialog_button, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            noNetworkConnectionDialog(isNetworkConnected());
+                        }
+
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+    }
+
+    private void noServerConnectionDialog(Boolean isNetworkConnected){
+        if(!isNetworkConnected){
+            AlertDialog.Builder builder = new AlertDialog.Builder(StartScreen.this);
+            builder.setTitle("No network connection!")
+                    .setMessage(getResources().getString(R.string.dialog_no_net_connection))
+                    .setIcon(R.mipmap.no_connection)
+                    .setCancelable(false)
+                    .setPositiveButton(R.string.quit_dialog_button, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            System.exit(1);
+                        }
+                    })
+                    .setNegativeButton(R.string.retry_dialog_button, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            noNetworkConnectionDialog(isNetworkConnected());
+                        }
+
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+    }
+
+
 
 
 }
