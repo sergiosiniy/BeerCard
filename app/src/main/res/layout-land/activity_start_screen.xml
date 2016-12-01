@@ -5,18 +5,6 @@
     android:orientation="horizontal"
     android:background="@drawable/beer_bubble_background_land">
 
-
-
-    <Button
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_margin="2dp"
-        android:padding="30dp"
-        android:layout_gravity="bottom"
-        android:onClick="closeTheApp"
-        android:text="@string/close_app_button" />
-
     <Button
         android:layout_width="0dp"
         android:layout_height="wrap_content"
