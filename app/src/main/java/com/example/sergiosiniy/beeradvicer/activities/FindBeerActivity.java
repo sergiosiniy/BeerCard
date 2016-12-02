@@ -35,6 +35,9 @@ import java.net.SocketAddress;
 import java.net.URL;
 import java.util.ArrayList;
 
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class FindBeerActivity extends AppCompatActivity {
 
     @Override
@@ -66,6 +69,10 @@ public class FindBeerActivity extends AppCompatActivity {
 
 
     private class BeerSearcher extends AsyncTask<Void, Integer, String> {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BeerRequests.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
         ProgressDialog progressDialog = new ProgressDialog(FindBeerActivity.this);
         HttpURLConnection serverConnection;
         BufferedReader br;

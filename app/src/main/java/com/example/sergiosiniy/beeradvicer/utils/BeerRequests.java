@@ -2,6 +2,7 @@ package com.example.sergiosiniy.beeradvicer.utils;
 
 public class BeerRequests {
 
+    public static final String BASE_URL = "http://31.134.121.230:55556/beermap";
     public static final String ALL_BEERS = "http://31.134.121.230:55556/beermap/beers";
     public static final String ALL_TYPES = "http://31.134.121.230:55556/beermap/types";
     public static final String FIND_ONE_BEER_BY_ID =
