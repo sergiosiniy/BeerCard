@@ -22,6 +22,7 @@ public class StartScreen extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_screen);
         noNetworkConnectionDialog(isNetworkConnected());
@@ -32,6 +33,7 @@ public class StartScreen extends AppCompatActivity {
      * Opens activity for beer searching
      */
     public void findBeer(View view){
+
         Intent findBeer = new Intent(this, FindBeerActivity.class);
         startActivity(findBeer);
     }
@@ -44,10 +46,11 @@ public class StartScreen extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item){
+
         switch(item.getItemId()){
             case R.id.send_beer:
-                Intent addBeer = new Intent(this, AdviceNewBeer.class);
-                startActivity(addBeer);
+                Intent sendBeer = new Intent(this, AdviceNewBeer.class);
+                startActivity(sendBeer);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -55,6 +58,7 @@ public class StartScreen extends AppCompatActivity {
     }
 
     private boolean isNetworkConnected(){
+
         final ConnectivityManager cm =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo()!=null;
@@ -66,10 +70,9 @@ public class StartScreen extends AppCompatActivity {
             SocketAddress socketAddress = new InetSocketAddress("31.134.121.230",55556);
             // Create an unbound socket
             Socket sock = new Socket();
-
             // This method will block no more than timeoutMs.
             // If the timeout occurs, SocketTimeoutException is thrown.
-            sock.connect(socketAddress, 2000);
+            sock.connect(socketAddress, 5000);
             sock.close();
             return true;
         }catch(Exception e){
@@ -78,6 +81,7 @@ public class StartScreen extends AppCompatActivity {
     }
 
     private void noNetworkConnectionDialog(Boolean isNetworkConnected){
+
         if(!isNetworkConnected){
             AlertDialog.Builder builder = new AlertDialog.Builder(StartScreen.this);
             builder.setTitle("No network connection!")
@@ -101,6 +105,7 @@ public class StartScreen extends AppCompatActivity {
     }
 
     private void noServerConnectionDialog(Boolean isNetworkConnected){
+
         if(!isNetworkConnected){
             AlertDialog.Builder builder = new AlertDialog.Builder(StartScreen.this);
             builder.setTitle("Server is unavailable.")
@@ -133,14 +138,6 @@ public class StartScreen extends AppCompatActivity {
         @Override
         protected void onPostExecute(Boolean isReachable) {
             noServerConnectionDialog(isReachable);
-
         }
-
-
     }
-
-
-
-
-
 }

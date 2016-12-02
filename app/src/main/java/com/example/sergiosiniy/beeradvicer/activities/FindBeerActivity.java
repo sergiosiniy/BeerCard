@@ -2,6 +2,7 @@ package com.example.sergiosiniy.beeradvicer.activities;
 
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -64,7 +65,8 @@ public class FindBeerActivity extends AppCompatActivity {
     }
 
 
-    private class BeerSearcher extends AsyncTask<Void, Void, String> {
+    private class BeerSearcher extends AsyncTask<Void, Integer, String> {
+        ProgressDialog progressDialog = new ProgressDialog(FindBeerActivity.this);
         HttpURLConnection serverConnection;
         BufferedReader br;
         String jsonResult = "fail";
@@ -73,6 +75,9 @@ public class FindBeerActivity extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
+            this.progressDialog.setMessage("Please, wait");
+            this.progressDialog.setCancelable(false);
+            this.progressDialog.show();
             new ServerAvailabilityChecker().execute();
             EditText beerSearch = (EditText) findViewById(R.id.find_beer_edittext);
             String searchSequence = beerSearch.getText().toString();
@@ -102,6 +107,7 @@ public class FindBeerActivity extends AppCompatActivity {
                 String line;
                 while ((line = br.readLine()) != null) {
                     sb.append(line);
+                    publishProgress();
                 }
 
                 jsonResult = sb.toString();
@@ -119,7 +125,6 @@ public class FindBeerActivity extends AppCompatActivity {
             }
         }
 
-
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
@@ -136,6 +141,9 @@ public class FindBeerActivity extends AppCompatActivity {
                     }
                     Intent beerList = new Intent(FindBeerActivity.this, BeerFragmentsActivity.class);
                     startActivity(beerList);
+                    if(this.progressDialog.isShowing()){
+                        this.progressDialog.dismiss();
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
