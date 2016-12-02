@@ -16,7 +16,12 @@ import com.example.sergiosiniy.beeradvicer.R;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.net.SocketAddress;
 import java.net.UnknownHostException;
+
+import static android.R.attr.port;
 
 public class StartScreen extends AppCompatActivity {
 
@@ -62,9 +67,17 @@ public class StartScreen extends AppCompatActivity {
     }
 
     private boolean isServerReachable(){
-        try{
-            return InetAddress.getByName("31.134.121.230").isReachable(2000);
-        }catch(IOException e){
+
+        try {
+            SocketAddress socketAddress = new InetSocketAddress("31.134.121.230",55556);
+            // Create an unbound socket
+            Socket sock = new Socket();
+
+            // This method will block no more than timeoutMs.
+            // If the timeout occurs, SocketTimeoutException is thrown.
+            sock.connect(socketAddress, 2000);
+            return true;
+        }catch(Exception e){
             return false;
         }
     }
