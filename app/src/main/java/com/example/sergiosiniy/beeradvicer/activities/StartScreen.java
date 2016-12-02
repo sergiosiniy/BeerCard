@@ -14,14 +14,9 @@ import android.view.View;
 
 import com.example.sergiosiniy.beeradvicer.R;
 
-import java.io.IOException;
-import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
-import java.net.UnknownHostException;
-
-import static android.R.attr.port;
 
 public class StartScreen extends AppCompatActivity {
 
@@ -62,11 +57,10 @@ public class StartScreen extends AppCompatActivity {
     private boolean isNetworkConnected(){
         final ConnectivityManager cm =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-
         return cm.getActiveNetworkInfo()!=null;
     }
 
-    private boolean isServerReachable(){
+    private static boolean isServerReachable(){
 
         try {
             SocketAddress socketAddress = new InetSocketAddress("31.134.121.230",55556);
@@ -76,6 +70,7 @@ public class StartScreen extends AppCompatActivity {
             // This method will block no more than timeoutMs.
             // If the timeout occurs, SocketTimeoutException is thrown.
             sock.connect(socketAddress, 2000);
+            sock.close();
             return true;
         }catch(Exception e){
             return false;

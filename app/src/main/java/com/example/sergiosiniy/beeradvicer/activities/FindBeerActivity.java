@@ -1,12 +1,17 @@
 package com.example.sergiosiniy.beeradvicer.activities;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sergiosiniy.beeradvicer.R;
@@ -22,7 +27,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
+import java.net.Socket;
+import java.net.SocketAddress;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -32,6 +40,17 @@ public class FindBeerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_beer);
+        EditText findBeer = (EditText) findViewById(R.id.find_beer_edittext);
+        findBeer.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    new BeerSearcher().execute();
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     /**
@@ -54,6 +73,7 @@ public class FindBeerActivity extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
+            new ServerAvailabilityChecker().execute();
             EditText beerSearch = (EditText) findViewById(R.id.find_beer_edittext);
             String searchSequence = beerSearch.getText().toString();
             if(searchSequence.contains(" ")){
@@ -90,15 +110,13 @@ public class FindBeerActivity extends AppCompatActivity {
             } catch (MalformedURLException e) {
                 url = "Malformed URL Exception! Something wrong with url connection.";
                 e.printStackTrace();
-
+                return "fail";
             } catch (IOException e) {
                 url = "Can't get data from server." +
                         "Server is unreachable.";
                 e.printStackTrace();
-
+                return "fail";
             }
-
-            return jsonResult;
         }
 
 
@@ -125,6 +143,62 @@ public class FindBeerActivity extends AppCompatActivity {
                 Toast.makeText(FindBeerActivity.this, url, Toast.LENGTH_LONG).show();
             }
         }
+    }
+
+    private static boolean isServerReachable(){
+
+        try {
+            SocketAddress socketAddress = new InetSocketAddress("31.134.121.230",55556);
+            // Create an unbound socket
+            Socket sock = new Socket();
+
+            // This method will block no more than timeoutMs.
+            // If the timeout occurs, SocketTimeoutException is thrown.
+            sock.connect(socketAddress, 2000);
+            sock.close();
+            return true;
+        }catch(Exception e){
+            return false;
+        }
+    }
+
+    private void noServerConnectionDialog(Boolean isNetworkConnected){
+        if(!isNetworkConnected){
+            AlertDialog.Builder builder = new AlertDialog.Builder(FindBeerActivity.this);
+            builder.setTitle("Server is unavailable.")
+                    .setMessage(getResources().getString(R.string.dialog_no_srv_connection))
+                    .setIcon(R.mipmap.no_connection)
+                    .setCancelable(false)
+                    .setPositiveButton(R.string.quit_dialog_button, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            System.exit(1);
+                        }
+                    })
+                    .setNegativeButton(R.string.retry_dialog_button, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            new ServerAvailabilityChecker().execute();
+                        }
+
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+    }
+
+    private class ServerAvailabilityChecker extends AsyncTask<Void,Void,Boolean> {
+
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+            return isServerReachable();
+        }
+
+        @Override
+        protected void onPostExecute(Boolean isReachable) {
+            noServerConnectionDialog(isReachable);
+
+        }
+
+
     }
 
 }
