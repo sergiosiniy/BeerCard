@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/find_beer_textview"
         android:inputType="text"
-        android:imeOptions="actionDone"
+        android:imeOptions="actionSearch"
         android:maxLines="1"
         android:maxLength="40"
         android:hint="@string/find_beer_hint"
