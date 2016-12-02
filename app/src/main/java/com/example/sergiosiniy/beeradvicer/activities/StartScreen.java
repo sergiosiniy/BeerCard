@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -13,7 +14,9 @@ import android.view.View;
 
 import com.example.sergiosiniy.beeradvicer.R;
 
+import java.io.IOException;
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 public class StartScreen extends AppCompatActivity {
 
@@ -22,7 +25,7 @@ public class StartScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_screen);
         noNetworkConnectionDialog(isNetworkConnected());
-        noServerConnectionDialog(isServerReachable());
+        new ServerAvailabilityChecker().execute();
     }
 
     /**
@@ -60,9 +63,8 @@ public class StartScreen extends AppCompatActivity {
 
     private boolean isServerReachable(){
         try{
-            InetAddress address = InetAddress.getByName("31.134.121.230");
-            return !address.equals("");
-        }catch(Exception e){
+            return InetAddress.getByName("31.134.121.230").isReachable(2000);
+        }catch(IOException e){
             return false;
         }
     }
@@ -93,8 +95,8 @@ public class StartScreen extends AppCompatActivity {
     private void noServerConnectionDialog(Boolean isNetworkConnected){
         if(!isNetworkConnected){
             AlertDialog.Builder builder = new AlertDialog.Builder(StartScreen.this);
-            builder.setTitle("No network connection!")
-                    .setMessage(getResources().getString(R.string.dialog_no_net_connection))
+            builder.setTitle("Server is unavailable.")
+                    .setMessage(getResources().getString(R.string.dialog_no_srv_connection))
                     .setIcon(R.mipmap.no_connection)
                     .setCancelable(false)
                     .setPositiveButton(R.string.quit_dialog_button, new DialogInterface.OnClickListener() {
@@ -104,7 +106,7 @@ public class StartScreen extends AppCompatActivity {
                     })
                     .setNegativeButton(R.string.retry_dialog_button, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            noNetworkConnectionDialog(isNetworkConnected());
+                            new ServerAvailabilityChecker().execute();
                         }
 
                     });
@@ -112,6 +114,23 @@ public class StartScreen extends AppCompatActivity {
             alert.show();
         }
     }
+
+    private class ServerAvailabilityChecker extends AsyncTask<Void,Void,Boolean> {
+
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+            return isServerReachable();
+        }
+
+        @Override
+        protected void onPostExecute(Boolean isReachable) {
+            noServerConnectionDialog(isReachable);
+
+        }
+
+
+    }
+
 
 
 
