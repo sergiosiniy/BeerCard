@@ -72,7 +72,7 @@ public class StartScreen extends AppCompatActivity {
             Socket sock = new Socket();
             // This method will block no more than timeoutMs.
             // If the timeout occurs, SocketTimeoutException is thrown.
-            sock.connect(socketAddress, 5000);
+            sock.connect(socketAddress, 2000);
             sock.close();
             return true;
         }catch(Exception e){
@@ -104,9 +104,9 @@ public class StartScreen extends AppCompatActivity {
         }
     }
 
-    private void noServerConnectionDialog(Boolean isNetworkConnected){
+    private void noServerConnectionDialog(Boolean isServerReachable){
 
-        if(!isNetworkConnected){
+        if(!isServerReachable){
             AlertDialog.Builder builder = new AlertDialog.Builder(StartScreen.this);
             builder.setTitle("Server is unavailable.")
                     .setMessage(getResources().getString(R.string.dialog_no_srv_connection))

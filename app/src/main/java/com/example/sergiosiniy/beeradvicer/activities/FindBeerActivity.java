@@ -69,10 +69,7 @@ public class FindBeerActivity extends AppCompatActivity {
 
 
     private class BeerSearcher extends AsyncTask<Void, Integer, String> {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BeerRequests.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+
         ProgressDialog progressDialog = new ProgressDialog(FindBeerActivity.this);
         HttpURLConnection serverConnection;
         BufferedReader br;
@@ -84,6 +81,7 @@ public class FindBeerActivity extends AppCompatActivity {
         protected void onPreExecute() {
             this.progressDialog.setMessage("Please, wait");
             this.progressDialog.setCancelable(false);
+            this.progressDialog.setIcon(R.mipmap.connecting);
             this.progressDialog.show();
             new ServerAvailabilityChecker().execute();
             EditText beerSearch = (EditText) findViewById(R.id.find_beer_edittext);
@@ -135,6 +133,9 @@ public class FindBeerActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
+            if(this.progressDialog.isShowing()){
+                this.progressDialog.dismiss();
+            }
             if (!result.equals("fail")) {
                 try {
                     BeerBrand.beerBrandArrayList = new ArrayList<>();
@@ -146,11 +147,10 @@ public class FindBeerActivity extends AppCompatActivity {
                                 .getString("beerBrand"), beerBrand.getString("beerDescription")
                                 , beerBrand.getInt("beerType")));
                     }
+
                     Intent beerList = new Intent(FindBeerActivity.this, BeerFragmentsActivity.class);
                     startActivity(beerList);
-                    if(this.progressDialog.isShowing()){
-                        this.progressDialog.dismiss();
-                    }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -191,7 +191,7 @@ public class FindBeerActivity extends AppCompatActivity {
                     })
                     .setNegativeButton(R.string.retry_dialog_button, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            new ServerAvailabilityChecker().execute();
+                            new BeerSearcher().execute();
                         }
 
                     });
