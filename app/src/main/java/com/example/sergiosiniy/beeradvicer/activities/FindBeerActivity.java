@@ -121,12 +121,12 @@ public class FindBeerActivity extends AppCompatActivity {
             } catch (MalformedURLException e) {
                 url = "Malformed URL Exception! Something wrong with url connection.";
                 e.printStackTrace();
-                return "fail";
+                return jsonResult;
             } catch (IOException e) {
                 url = "Can't get data from server." +
                         "Server is unreachable.";
                 e.printStackTrace();
-                return "fail";
+                return jsonResult;
             }
         }
 
