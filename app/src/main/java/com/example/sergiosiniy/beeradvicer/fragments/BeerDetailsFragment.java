@@ -1,11 +1,13 @@
 package com.example.sergiosiniy.beeradvicer.fragments;
 
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.sergiosiniy.beeradvicer.R;
@@ -51,9 +53,13 @@ public class BeerDetailsFragment extends Fragment {
         if(view!=null){
             TextView beerTitile = (TextView) view.findViewById(R.id.beer_brand_name);
             TextView beerDetails = (TextView) view.findViewById(R.id.beer_brand_details);
+            ImageView beerImage = (ImageView) view.findViewById(R.id.beer_image);
             BeerBrand beerBrand = BeerBrand.beerBrandArrayList.get((int) beerItemID);
             beerTitile.setText(beerBrand.getName());
             beerDetails.setText(beerBrand.getBeerDescription());
+            if(!beerBrand.getBeerImageUrl().isEmpty()) {
+                beerImage.setImageURI(Uri.parse(beerBrand.getBeerImageUrl()));
+            }
         }
     }
 
