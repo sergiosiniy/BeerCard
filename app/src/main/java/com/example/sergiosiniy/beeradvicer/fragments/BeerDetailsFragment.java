@@ -1,7 +1,10 @@
 package com.example.sergiosiniy.beeradvicer.fragments;
 
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,6 +15,10 @@ import android.widget.TextView;
 
 import com.example.sergiosiniy.beeradvicer.R;
 import com.example.sergiosiniy.beeradvicer.utils.BeerBrand;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -51,20 +58,52 @@ public class BeerDetailsFragment extends Fragment {
         super.onStart();
         View view = getView();
         if(view!=null){
-            TextView beerTitile = (TextView) view.findViewById(R.id.beer_brand_name);
+            TextView beerTitle = (TextView) view.findViewById(R.id.beer_brand_name);
             TextView beerDetails = (TextView) view.findViewById(R.id.beer_brand_details);
-            ImageView beerImage = (ImageView) view.findViewById(R.id.beer_image);
             BeerBrand beerBrand = BeerBrand.beerBrandArrayList.get((int) beerItemID);
-            beerTitile.setText(beerBrand.getName());
+            beerTitle.setText(beerBrand.getName());
             beerDetails.setText(beerBrand.getBeerDescription());
-            if(!beerBrand.getBeerImageUrl().isEmpty()) {
-                beerImage.setImageURI(Uri.parse(beerBrand.getBeerImageUrl()));
+            if(beerBrand.getBeerImageUrl()!=null) {
+                new GetImage().execute(beerBrand);
             }
         }
     }
 
     public void setBeerItemID(long id){
         this.beerItemID=id;
+    }
+
+    private class GetImage extends AsyncTask<BeerBrand,Void,Bitmap> {
+
+        ImageView beerImage;
+        @Override
+        protected void onPreExecute() {
+            View view = getView();
+            beerImage = (ImageView) view.findViewById(R.id.beer_image);
+
+        }
+
+        @Override
+        protected Bitmap doInBackground(BeerBrand... beerBrands) {
+            try {
+                URL url = new URL(beerBrands[0].getBeerImageUrl());
+                Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                return bitmap;
+            }catch(IOException e){
+                e.printStackTrace();
+                return null;
+            }
+
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            if(bitmap!=null)
+            beerImage.setImageBitmap(bitmap);
+
+        }
+
+
     }
 
 

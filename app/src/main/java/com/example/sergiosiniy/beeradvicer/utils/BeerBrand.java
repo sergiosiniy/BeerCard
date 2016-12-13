@@ -13,10 +13,11 @@ public class BeerBrand {
     public static ArrayList<BeerBrand> beerBrandArrayList;
 
 
-    public BeerBrand(String beerBrand, String beerDescription, int beerType) {
+    public BeerBrand(String beerBrand, String beerDescription, int beerType, String beerImageUrl) {
         this.beerName = beerBrand;
         this.beerType=beerType;
         this.beerDescription=beerDescription;
+        this.beerImageUrl=beerImageUrl;
     }
 
 

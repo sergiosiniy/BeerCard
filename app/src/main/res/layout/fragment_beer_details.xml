@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:contentDescription="Beer image"
-        android:scaleType="centerCrop"/>
+        android:scaleType="center"/>
     <TextView
         android:id="@+id/beer_brand_details"
         android:layout_width="match_parent"

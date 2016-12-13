@@ -145,7 +145,7 @@ public class FindBeerActivity extends AppCompatActivity {
                         JSONObject beerBrand = beerArray.getJSONObject(i);
                         BeerBrand.beerBrandArrayList.add(new BeerBrand(beerBrand
                                 .getString("beerBrand"), beerBrand.getString("beerDescription")
-                                , beerBrand.getInt("beerType")));
+                                , beerBrand.getInt("beerType"), beerBrand.getString("beerImage")));
                     }
 
                     Intent beerList = new Intent(FindBeerActivity.this, BeerFragmentsActivity.class);
