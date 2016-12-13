@@ -7,6 +7,7 @@ public class BeerBrand {
     private String beerName;
     private int beerType;
     private String beerDescription;
+    private String beerImageUrl;
 
 
     public static ArrayList<BeerBrand> beerBrandArrayList;
@@ -29,6 +30,9 @@ public class BeerBrand {
 
     public String getBeerDescription() {
         return this.beerDescription;
+    }
+    public String getBeerImageUrl() {
+        return beerImageUrl;
     }
 
     public String toString(){

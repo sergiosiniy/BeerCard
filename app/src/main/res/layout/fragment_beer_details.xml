@@ -12,6 +12,12 @@
         android:layout_height="wrap_content"
         android:text=""
         style="@android:style/TextAppearance.Large"/>
+    <ImageView
+        android:id="@+id/beer_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="Beer image"
+        android:scaleType="centerCrop"/>
     <TextView
         android:id="@+id/beer_brand_details"
         android:layout_width="match_parent"
