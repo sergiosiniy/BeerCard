@@ -80,7 +80,6 @@ public class BeerDetailsFragment extends Fragment {
         protected void onPreExecute() {
             View view = getView();
             beerImage = (ImageView) view.findViewById(R.id.beer_image);
-
         }
 
         @Override
@@ -93,17 +92,13 @@ public class BeerDetailsFragment extends Fragment {
                 e.printStackTrace();
                 return null;
             }
-
         }
 
         @Override
         protected void onPostExecute(Bitmap bitmap) {
             if(bitmap!=null)
             beerImage.setImageBitmap(bitmap);
-
         }
-
-
     }
 
 

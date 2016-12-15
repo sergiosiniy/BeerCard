@@ -3,8 +3,10 @@ package com.example.sergiosiniy.beeradvicer.activities;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -45,6 +47,7 @@ public class FindBeerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_beer);
         EditText findBeer = (EditText) findViewById(R.id.find_beer_edittext);
+        new NetworkConnectionChecker().execute();
         findBeer.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -74,25 +77,26 @@ public class FindBeerActivity extends AppCompatActivity {
         HttpURLConnection serverConnection;
         BufferedReader br;
         String jsonResult = "fail";
-        String url;
+        String request;
 
 
         @Override
         protected void onPreExecute() {
+            new NetworkConnectionChecker().execute();
             this.progressDialog.setMessage("Please, wait");
             this.progressDialog.setCancelable(false);
+            this.progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             this.progressDialog.setIcon(R.mipmap.connecting);
             this.progressDialog.show();
-            new ServerAvailabilityChecker().execute();
             EditText beerSearch = (EditText) findViewById(R.id.find_beer_edittext);
             String searchSequence = beerSearch.getText().toString();
             if(searchSequence.contains(" ")){
                 searchSequence=searchSequence.replace(" ","%20");
             }
             if (beerSearch.getText().toString().length() != 0) {
-                url = BeerRequests.FIND_ALL_BEERS_BY_STRING + searchSequence;
+                request = BeerRequests.FIND_ALL_BEERS_BY_STRING + searchSequence;
             } else {
-                url = BeerRequests.ALL_BEERS;
+                request = BeerRequests.ALL_BEERS;
             }
 
         }
@@ -101,7 +105,7 @@ public class FindBeerActivity extends AppCompatActivity {
         protected String doInBackground(Void... s) {
             StringBuffer sb = new StringBuffer();
             try {
-                URL beerServerUrl = new URL(url);
+                URL beerServerUrl = new URL(request);
                 serverConnection = (HttpURLConnection) beerServerUrl.openConnection();
                 serverConnection.setRequestMethod("GET");
                 serverConnection.connect();
@@ -119,11 +123,11 @@ public class FindBeerActivity extends AppCompatActivity {
                 return jsonResult;
 
             } catch (MalformedURLException e) {
-                url = "Malformed URL Exception! Something wrong with url connection.";
+                request = "Malformed URL Exception! Something wrong with url connection.";
                 e.printStackTrace();
                 return jsonResult;
             } catch (IOException e) {
-                url = "Can't get data from server." +
+                request = "Can't get data from server." +
                         "Server is unreachable.";
                 e.printStackTrace();
                 return jsonResult;
@@ -155,12 +159,19 @@ public class FindBeerActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             } else {
-                Toast.makeText(FindBeerActivity.this, url, Toast.LENGTH_LONG).show();
+                Toast.makeText(FindBeerActivity.this, request, Toast.LENGTH_LONG).show();
             }
         }
     }
 
-    private static boolean isServerReachable(){
+    private boolean isNetworkConnected(){
+
+        final ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo()!=null;
+    }
+
+    private boolean isServerReachable(){
 
         try {
             SocketAddress socketAddress = new InetSocketAddress("31.134.121.230",55556);
@@ -177,11 +188,36 @@ public class FindBeerActivity extends AppCompatActivity {
         }
     }
 
-    private void noServerConnectionDialog(Boolean isNetworkConnected){
+    private void noServerConnectionDialog(Boolean isServerReachable){
+
+            if (!isServerReachable) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(FindBeerActivity.this);
+                builder.setTitle("Server is unavailable.")
+                        .setMessage(getResources().getString(R.string.dialog_no_srv_connection))
+                        .setIcon(R.mipmap.no_connection)
+                        .setCancelable(false)
+                        .setPositiveButton(R.string.quit_dialog_button, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                System.exit(1);
+                            }
+                        })
+                        .setNegativeButton(R.string.retry_dialog_button, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                new ServerAvailabilityChecker().execute();
+                            }
+
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+    }
+
+    private void noNetworkConnectionDialog(Boolean isNetworkConnected){
+
         if(!isNetworkConnected){
             AlertDialog.Builder builder = new AlertDialog.Builder(FindBeerActivity.this);
-            builder.setTitle("Server is unavailable.")
-                    .setMessage(getResources().getString(R.string.dialog_no_srv_connection))
+            builder.setTitle("No network connection!")
+                    .setMessage(getResources().getString(R.string.dialog_no_net_connection))
                     .setIcon(R.mipmap.no_connection)
                     .setCancelable(false)
                     .setPositiveButton(R.string.quit_dialog_button, new DialogInterface.OnClickListener() {
@@ -191,12 +227,14 @@ public class FindBeerActivity extends AppCompatActivity {
                     })
                     .setNegativeButton(R.string.retry_dialog_button, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            new BeerSearcher().execute();
+                            new NetworkConnectionChecker().execute();
                         }
 
                     });
             AlertDialog alert = builder.create();
             alert.show();
+        }else {
+            new ServerAvailabilityChecker().execute();
         }
     }
 
@@ -212,8 +250,20 @@ public class FindBeerActivity extends AppCompatActivity {
             noServerConnectionDialog(isReachable);
 
         }
+    }
 
+    private class NetworkConnectionChecker extends AsyncTask<Void,Void,Boolean> {
 
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+            return isNetworkConnected();
+        }
+
+        @Override
+        protected void onPostExecute(Boolean isConnected) {
+            noNetworkConnectionDialog(isConnected);
+
+        }
     }
 
 }
