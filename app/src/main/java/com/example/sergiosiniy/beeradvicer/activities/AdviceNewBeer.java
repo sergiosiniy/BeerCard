@@ -1,5 +1,6 @@
 package com.example.sergiosiniy.beeradvicer.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.app.ShareCompat;
@@ -11,7 +12,7 @@ import android.widget.Spinner;
 
 import com.example.sergiosiniy.beeradvicer.R;
 
-public class AdviceNewBeer extends AppCompatActivity {
+public class AdviceNewBeer extends Activity {
 
 
 

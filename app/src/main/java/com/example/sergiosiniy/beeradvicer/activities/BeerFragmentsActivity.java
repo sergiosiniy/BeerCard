@@ -1,5 +1,6 @@
 package com.example.sergiosiniy.beeradvicer.activities;
 
+import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,7 +18,7 @@ import com.example.sergiosiniy.beeradvicer.fragments.BeerListFragment;
 
 import static com.example.sergiosiniy.beeradvicer.activities.BeerDetailsActivity.EXTRA_BEER_ITEM_ID;
 
-public class BeerFragmentsActivity extends AppCompatActivity implements BeerListFragment.
+public class BeerFragmentsActivity extends Activity implements BeerListFragment.
         BeerListListener {
 
     private BeerDetailsFragment beerFrDetails;

@@ -1,5 +1,6 @@
 package com.example.sergiosiniy.beeradvicer.activities;
 
+import android.app.Activity;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,7 +11,7 @@ import android.widget.TextView;
 import com.example.sergiosiniy.beeradvicer.R;
 import com.example.sergiosiniy.beeradvicer.fragments.BeerDetailsFragment;
 
-public class BeerDetailsActivity extends AppCompatActivity {
+public class BeerDetailsActivity extends Activity {
     public static final String EXTRA_BEER_ITEM_ID="id";
     private BeerDetailsFragment beerFrDetails;
 

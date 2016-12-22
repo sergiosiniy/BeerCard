@@ -1,6 +1,8 @@
 package com.example.sergiosiniy.beeradvicer.activities;
 
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -8,10 +10,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Explode;
+import android.transition.Fade;
+import android.transition.Slide;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -40,11 +47,12 @@ import java.util.ArrayList;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class FindBeerActivity extends AppCompatActivity {
+public class FindBeerActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
         setContentView(R.layout.activity_find_beer);
         EditText findBeer = (EditText) findViewById(R.id.find_beer_edittext);
         new NetworkConnectionChecker().execute();
@@ -152,8 +160,15 @@ public class FindBeerActivity extends AppCompatActivity {
                                 , beerBrand.getInt("beerType"), beerBrand.getString("beerImage")));
                     }
 
-                    Intent beerList = new Intent(FindBeerActivity.this, BeerFragmentsActivity.class);
-                    startActivity(beerList);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        getWindow().setExitTransition(new Slide());
+                        Intent beerList = new Intent(FindBeerActivity.this, BeerFragmentsActivity.class);
+                        startActivity(beerList, ActivityOptions
+                                .makeSceneTransitionAnimation(FindBeerActivity.this).toBundle());
+                    }else {
+                        Intent beerList = new Intent(FindBeerActivity.this, BeerFragmentsActivity.class);
+                        startActivity(beerList);
+                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
