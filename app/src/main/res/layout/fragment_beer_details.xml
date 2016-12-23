@@ -6,22 +6,33 @@
     android:orientation="vertical"
     tools:context="com.example.sergiosiniy.beeradvicer.fragments.BeerDetailsFragment">
 
-    <TextView
-        android:id="@+id/beer_brand_name"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=""
-        style="@android:style/TextAppearance.Large"/>
-    <ImageView
-        android:id="@+id/beer_image"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:contentDescription="Beer image"
-        android:scaleType="center"/>
-    <TextView
-        android:id="@+id/beer_brand_details"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=""
-        style="@android:style/TextAppearance.DeviceDefault.Medium"/>
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/beer_brand_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                style="@android:style/TextAppearance.Large"/>
+            <ImageView
+                android:id="@+id/beer_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="Beer image"
+                android:scaleType="center"/>
+            <TextView
+                android:id="@+id/beer_brand_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                style="@android:style/TextAppearance.DeviceDefault.Medium"/>
+        </LinearLayout>
+
+    </ScrollView>
+
 </LinearLayout>
