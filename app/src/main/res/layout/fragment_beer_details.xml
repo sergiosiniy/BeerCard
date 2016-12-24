@@ -1,38 +1,35 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_beer_details"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.example.sergiosiniy.beeradvicer.fragments.BeerDetailsFragment">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/beer_brand_name"
+            style="@android:style/TextAppearance.Large"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/beer_brand_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                style="@android:style/TextAppearance.Large"/>
-            <ImageView
-                android:id="@+id/beer_image"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:contentDescription="Beer image"
-                android:scaleType="center"/>
-            <TextView
-                android:id="@+id/beer_brand_details"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                style="@android:style/TextAppearance.DeviceDefault.Medium"/>
-        </LinearLayout>
+            android:text="" />
 
-    </ScrollView>
+        <ImageView
+            android:id="@+id/beer_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="Beer image"
+            android:scaleType="center" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/beer_brand_details"
+            style="@android:style/TextAppearance.DeviceDefault.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="" />
+    </LinearLayout>
+
+</ScrollView>

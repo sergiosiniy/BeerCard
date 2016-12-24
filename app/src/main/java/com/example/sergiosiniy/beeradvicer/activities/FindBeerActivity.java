@@ -1,7 +1,5 @@
 package com.example.sergiosiniy.beeradvicer.activities;
 
-
-import android.app.Activity;
 import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -13,8 +11,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.transition.Explode;
-import android.transition.Fade;
 import android.transition.Slide;
 import android.view.KeyEvent;
 import android.view.View;
@@ -47,7 +43,7 @@ import java.util.ArrayList;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class FindBeerActivity extends Activity {
+public class FindBeerActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

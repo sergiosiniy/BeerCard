@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    class="com.example.sergiosiniy.beeradvicer.fragments.BeerDetailsFragment"
     android:id="@+id/beer_detail_frag"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"/>
+    class="com.example.sergiosiniy.beeradvicer.fragments.BeerDetailsFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+
+
+
