@@ -58,14 +58,15 @@ public class BeerDetailsFragment extends Fragment {
         super.onStart();
         View view = getView();
         if(view!=null){
-            TextView beerTitle = (TextView) view.findViewById(R.id.beer_brand_name);
-            TextView beerDetails = (TextView) view.findViewById(R.id.beer_brand_details);
             BeerBrand beerBrand = BeerBrand.beerBrandArrayList.get((int) beerItemID);
-            beerTitle.setText(beerBrand.getName());
-            beerDetails.setText(beerBrand.getBeerDescription());
             if(beerBrand.getBeerImageUrl()!=null) {
                 new GetImage().execute(beerBrand);
             }
+            TextView beerTitle = (TextView) view.findViewById(R.id.beer_brand_name);
+            TextView beerDetails = (TextView) view.findViewById(R.id.beer_brand_details);
+            beerTitle.setText(beerBrand.getName());
+            beerDetails.setText(beerBrand.getBeerDescription());
+
         }
     }
 

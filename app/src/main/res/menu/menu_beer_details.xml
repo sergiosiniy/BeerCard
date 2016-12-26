@@ -2,17 +2,12 @@
 <menu  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".activities.BeerFragmentsActivity">
+    tools:context=".activities.BeerDetailsActivity">
     <item android:id="@+id/share_beer"
         android:title="@string/share_beer_actionbar_button"
         android:orderInCategory="1"
         app:showAsAction="always"
         android:icon="@mipmap/ic_share_white_36dp"/>
-    <item
-        android:id="@+id/action_search"
-        android:icon="@android:drawable/ic_menu_search"
-        app:showAsAction="always"
-        app:actionViewClass="android.support.v7.widget.SearchView"
-        android:title="Search"/>
+
 
 </menu>

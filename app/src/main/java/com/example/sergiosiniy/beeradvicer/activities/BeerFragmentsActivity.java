@@ -59,7 +59,7 @@ public class BeerFragmentsActivity extends AppCompatActivity implements BeerList
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_beer_details, menu);
+        getMenuInflater().inflate(R.menu.menu_beer_list, menu);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
         SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
