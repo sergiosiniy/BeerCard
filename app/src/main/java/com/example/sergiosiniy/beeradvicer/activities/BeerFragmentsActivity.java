@@ -71,8 +71,8 @@ public class BeerFragmentsActivity extends AppCompatActivity implements BeerList
         try {
             TextView beerBrName = (TextView) beerFrDetails.getView()
                     .findViewById(R.id.beer_brand_name);
-            TextView beerBrDetails = (TextView) beerFrDetails.getView()
-                    .findViewById(R.id.beer_brand_details);
+            TextView beerBrDesription = (TextView) beerFrDetails.getView()
+                    .findViewById(R.id.beer_brand_description);
 
             switch (item.getItemId()) {
                 case R.id.share_beer:
@@ -80,7 +80,7 @@ public class BeerFragmentsActivity extends AppCompatActivity implements BeerList
                             .setType("text/plain")
                             .setSubject(beerBrName.getText().toString())
                             .setText(beerBrName.getText().toString()+" - "
-                                    +beerBrDetails.getText().toString())
+                                    +beerBrDesription.getText().toString())
                             .startChooser();
                 default:
                     return super.onOptionsItemSelected(item);

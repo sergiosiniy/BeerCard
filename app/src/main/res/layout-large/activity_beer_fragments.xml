@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:baselineAligned="false">
-    <include layout="@layout/toolbar" />
+    android:orientation="vertical">
 
-    <fragment
-        class="com.example.sergiosiniy.beeradvicer.fragments.BeerListFragment"
-        android:id="@+id/list_frag"
-        android:layout_width="0dp"
-        android:layout_weight="2"
-        android:layout_height="match_parent" />
-    <FrameLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="0dp"
-        android:layout_weight="3"
-        android:layout_height="match_parent"/>
+    <include layout="@layout/toolbar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <fragment
+            android:id="@+id/list_frag"
+            class="com.example.sergiosiniy.beeradvicer.fragments.BeerListFragment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2" />
+
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3" />
+    </LinearLayout>
 </LinearLayout>
