@@ -27,7 +27,7 @@
         android:imeOptions="actionSearch"
         android:maxLines="1"
         android:maxLength="40"
-        android:hint="@string/find_beer_hint"
+        android:hint="@string/search_beer_hint"
         android:background="@android:color/white"/>
 
     <Button

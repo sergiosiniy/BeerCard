@@ -48,7 +48,7 @@
 
     <!-- Hints -->
     <string name="brand_hint">Enter the brand name</string>
-    <string name="find_beer_hint">Beer brand name (i.e. Hoegarden)</string>
+    <string name="search_beer_hint">Beer brand name (i.e. Hoegaarden)</string>
     <string name="find_type_hint">Beer type (i.e. Light Lager)</string>
 
     <!--Dialogs-->

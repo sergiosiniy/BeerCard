@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/find_beer_textview"
-        android:hint="@string/find_beer_hint"
+        android:hint="@string/search_beer_hint"
         android:inputType="text"
         android:imeOptions="actionSearch"
         android:maxLines="1"

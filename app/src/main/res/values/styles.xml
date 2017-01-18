@@ -7,5 +7,11 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="AppSearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="queryBackground">@android:color/transparent</item>
+        <item name="searchIcon">@mipmap/ic_search_white_24dp</item>
+        <item name="queryHint">@string/search_beer_hint</item>
+        <item name="android:imeActionId">6</item>
+    </style>
 
 </resources>
